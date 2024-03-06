@@ -2,3 +2,6 @@
 
 # python virtual environment
 venv
+
+# misc
+__pycache__
