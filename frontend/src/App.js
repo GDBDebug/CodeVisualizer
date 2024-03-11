@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import CodeEditor from "./components/CodeEditor";
 
 function App() {
-  const [currentDateTime, setCurrentDateTime] = useState(0);
-
-  useEffect(() => {
-    fetch("/now")
-      .then((result) => result.json())
-      .then((data) => {
-        setCurrentDateTime(data.now);
-      });
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Current date and time is {currentDateTime}.</p>
-      </header>
-    </div>
+    <Box minH="100vh" bg="#3e3e42" color="white" px={3} py={3}>
+      <CodeEditor />
+    </Box>
   );
 }
 
