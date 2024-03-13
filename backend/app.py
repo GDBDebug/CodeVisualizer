@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/compile', methods=['POST'])
 def compile_source():
-    source = request.json.get('source')
+    source = request.json.get('sourceCode')
 
     try:
         with open('main.cpp', 'w') as file:
