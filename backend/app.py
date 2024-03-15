@@ -1,27 +1,40 @@
+import time, re
 from flask import Flask, request, jsonify
-import subprocess
 
+from constants import DEFAULT_CPP_FILE_NAME
+from utils import compile_code, execute_program, remove_files
 
 app = Flask(__name__)
 
 @app.route('/compile', methods=['POST'])
 def compile_source():
-    source = request.json.get('sourceCode')
+    source_code = request.json.get('sourceCode')
+    user_inputs = request.json.get('inputs')
 
     try:
-        with open('main.cpp', 'w') as file:
-            file.write(source)
+        with open(DEFAULT_CPP_FILE_NAME, 'w') as file:
+            file.write(source_code)
         
-        # Run the subprocess that compiles the .cpp file using g++ and stores result (0 in case of success, and -N in case of failure)
-        result = subprocess.run(['g++', 'main.cpp', '-o', 'main'], capture_output=True, text=True)
+        # Run process to compile code and calculate time taken by the process to finish
+        start_time = time.time()
+        compilation_result = compile_code(file.name)
+        end_time = time.time()
 
-        if result.returncode != 0:
-            return jsonify({'status': False, 'output': result.stderr})
-        
-        # Run the subprocess that executes the compiled file
-        output = subprocess.run(['./main'], capture_output=True, text=True)
-        return jsonify({'status': True, 'output': output.stdout})
+        # Run the program in case of successful compilation
+        if compilation_result.returncode == 0:
+            program_result = execute_program(user_inputs)
+
+        # Extract {file_name, line, column, type, message} from the compilation process's stderr
+        error_message = re.findall(r'(.*):(\d+):(\d+): (error|warning): (.*)', compilation_result.stderr)
+        for info in error_message:
+            error_info = {'file_name': info[0], 'line': info[1], 'column': info[2], 'type': info[3], 'message': info[4]}
+
+        return jsonify({'status': 'Success' if compilation_result.returncode == 0 else 'Failure',
+                        'exit_code': program_result.returncode if compilation_result.returncode == 0 else compilation_result.returncode, 
+                        'stdout': program_result.stdout if compilation_result.returncode == 0 else compilation_result.stdout,
+                        'stderr': compilation_result.stderr,
+                        'error_info': '' if compilation_result.returncode == 0 else error_info,
+                        'time': round((end_time-start_time)*1000, 2)})
         
     finally:
-        # Run the subprocess that removes the temporary files created
-        subprocess.run(['rm', 'main.cpp', 'main'])
+       remove_files()         

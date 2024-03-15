@@ -1,0 +1,1 @@
+DEFAULT_CPP_FILE_NAME = 'main.cpp'
