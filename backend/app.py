@@ -1,5 +1,5 @@
 import time, re
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 
 from constants import DEFAULT_CPP_FILE_NAME
 from utils import compile_code, execute_program, remove_files
@@ -37,4 +37,17 @@ def compile_source():
                         'time': round((end_time-start_time)*1000, 2)})
         
     finally:
-       remove_files()         
+       remove_files()
+
+@app.route('/download', methods=['POST'])
+def download_code():
+    source_code = request.json.get('sourceCode')
+
+    try:
+        with open(DEFAULT_CPP_FILE_NAME, 'w') as file:
+            file.write(source_code)
+
+        return send_file(DEFAULT_CPP_FILE_NAME, as_attachment=True)
+
+    finally:
+        remove_files()
