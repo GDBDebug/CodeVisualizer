@@ -1,4 +1,4 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Text,Heading } from "@chakra-ui/react";
 import Editor from "@monaco-editor/react";
 import { useRef, useState } from "react";
 
@@ -32,16 +32,10 @@ const CodeEditor = () => {
   };
 
   return (
-    <Box>
-      <Button
-        my={4}
-        variant="solid"
-        colorScheme="facebook"
-        onClick={requestCompile}
-        borderRadius="14px"
-      >
-        Compile and Run
-      </Button>
+    <Box  backgroundColor={"#121212"}> 
+    <Heading mx={4}>Code Visualizer</Heading>
+    <Box display='flex' my={4}>
+      <Box mx={4} p={1} w='50%' border="4px" borderColor="#008080" borderRadius="5px">
       <Editor
         height="75vh"
         theme="vs-dark"
@@ -64,9 +58,25 @@ const CodeEditor = () => {
         }}
         value={sourceCode}
       />
-      <Box my={4} p={2} border="4px" borderColor="#314e89" borderRadius="14px">
+        </Box>
+      <Box mx={4} p={4} w='50%' border="4px" borderColor="#008080" borderRadius="5px">
         <Text>{compilationResult}</Text>
       </Box>
+    </Box>
+    
+      <Button
+        mx={4}
+        my={10}
+        variant="solid"
+        color={"#000000"}
+        fontWeight='bold'
+        backgroundColor={"#008080"}
+        onClick={requestCompile}
+        borderRadius="5px"
+      >
+        Compile and Run
+      </Button>
+      
     </Box>
   );
 };
