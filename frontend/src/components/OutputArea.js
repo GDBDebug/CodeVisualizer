@@ -6,14 +6,16 @@ const OutputArea = () => {
       m={4}
       px={6}
       py={4}
-      h="85vh"
+      h="75vh"
       w="35vw"
       border="4px"
       borderColor="tomato"
       borderRadius="20px"
       overflow="hidden"
     >
-      <Text as='kbd'>Output</Text>
+      <Text as="kbd" fontSize="xl">
+        Output
+      </Text>
     </Box>
   );
 };

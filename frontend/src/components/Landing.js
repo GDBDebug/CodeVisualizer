@@ -1,14 +1,17 @@
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import CodeEditor from "./CodeEditor";
 import OutputArea from "./OutputArea";
+import UserInputArea from "./UserInputArea";
 
 const Landing = () => {
   return (
     <Box>
       <Flex>
         <CodeEditor />
-        <Spacer />
-        <OutputArea />
+        <Flex flexDirection="column">
+          <UserInputArea />
+          <OutputArea />
+        </Flex>
       </Flex>
     </Box>
   );
