@@ -1,10 +1,15 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
 import CodeEditor from "./CodeEditor";
+import OutputArea from "./OutputArea";
 
 const Landing = () => {
   return (
     <Box>
-      <CodeEditor />
+      <Flex>
+        <CodeEditor />
+        <Spacer />
+        <OutputArea />
+      </Flex>
     </Box>
   );
 };
