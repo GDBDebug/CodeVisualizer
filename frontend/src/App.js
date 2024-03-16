@@ -4,7 +4,7 @@ import CodeEditor from "./components/CodeEditor";
 
 function App() {
   return (
-    <Box minH="100vh" bg="#3e3e42" color="white" px={3} py={3}>
+    <Box minH="100vh" bg="#3e3e42" color="white" >
       <CodeEditor />
     </Box>
   );
