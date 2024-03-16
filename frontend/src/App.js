@@ -1,13 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import CodeEditor from "./components/CodeEditor";
+import Landing from "./components/Landing";
 
 function App() {
-  return (
-    <Box minH="100vh" bg="#3e3e42" color="white" >
-      <CodeEditor />
-    </Box>
-  );
+  return <Landing />;
 }
 
 export default App;
