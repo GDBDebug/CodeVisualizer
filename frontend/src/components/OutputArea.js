@@ -8,8 +8,8 @@ const OutputArea = ({outputString}) => {
       py={4}
       h="75vh"
       w="35vw"
-      border="4px"
-      borderColor="tomato"
+      border="2px"
+      borderColor="#FED766"
       borderRadius="20px"
       overflow="hidden"
     >

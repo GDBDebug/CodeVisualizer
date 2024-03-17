@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useToast } from "@chakra-ui/react";
+import { Box, Flex, useToast } from "@chakra-ui/react";
 import CodeEditor from "./CodeEditor";
 import OutputArea from "./OutputArea";
 import UserInputArea from "./UserInputArea";
@@ -108,7 +108,6 @@ const Landing = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Text>{userInputs}</Text>
     </Box>
   );
 };

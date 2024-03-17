@@ -20,20 +20,20 @@ const CodeEditor = ({code, onChange}) => {
       m={4}
       h="85vh"
       w="65vw"
-      border="4px"
-      borderColor="tomato"
+      border="2px"
+      borderColor="#FE4A49"
       borderRadius="20px"
       overflow="hidden"
     >
       <Editor
-        theme="vs-dark"
+        theme="vs-light"
         defaultLanguage="cpp"
         defaultValue="// Code goes here"
         value={sourceCode}
         onMount={handleEditorDidMount}
         onChange={handleEditorChange}
         options={{
-          glyphMargin: true,
+          glyphMargin: false,
           cursorStyle: "line-thin",
           selectionHighlight: true,
           scrollBeyondLastLine: false,

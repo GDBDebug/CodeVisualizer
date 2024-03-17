@@ -16,30 +16,31 @@ import { DownloadIcon, AddIcon } from "@chakra-ui/icons";
 const Menubar = ({requestCompile, requestDownload}) => {
   return (
     <Box
-      m={4}
+      mx={4}
+      my={2}
       px={4}
-      py={2}
+      py={4}
       border="4px"
-      borderColor="#008080"
+      borderColor="#2AB7CA"
       borderRadius="20px"
       overflow="hidden"
     >
       <Flex aminWidth="max-content" alignItems="center" gap="6">
-        <Button borderRadius="10px" bg="#008080" onClick={requestCompile}>
+        <Button size="lg" variant="outline" bgColor="#2AB7CA" borderRadius="10px" onClick={requestCompile}>
           Compile and Run
         </Button>
-        <Button borderRadius="10px" bg="#008080">
+        <Button size="lg" variant="outline" bgColor="#2AB7CA" borderRadius="10px">
           Visualize
         </Button>
         <Spacer />
         <ButtonGroup isAttached>
           <Tooltip hasArrow label="Save to file">
-            <IconButton icon={<DownloadIcon />} onClick={requestDownload}></IconButton>
+            <IconButton size="md" variant="outline" color="#2AB7CA" icon={<DownloadIcon />} onClick={requestDownload}></IconButton>
           </Tooltip>
-          <IconButton icon={<AddIcon />}></IconButton>
+          <IconButton size="md" variant="outline" color="#2AB7CA" icon={<AddIcon />}></IconButton>
         </ButtonGroup>
         <Menu>
-          <MenuButton as={Button}>Options</MenuButton>
+          <MenuButton size="lg" as={Button}>Menu</MenuButton>
           <MenuList>
             <MenuItem>Work in Progress</MenuItem>
           </MenuList>

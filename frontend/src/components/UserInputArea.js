@@ -5,15 +5,15 @@ const UserInputArea = ({userInputs, setUserInputs}) => {
   return (
     <Box
       m={4}
-      p={2}
+      p={4}
       w="35vw"
-      border="4px"
-      borderColor="tomato"
+      border="2px"
+      borderColor="#FED766"
       borderRadius="20px"
       overflow="hidden"
     >
       <Input
-        variant="filled"
+        variant="unstyled"
         placeholder="Enter space separated inputs before hitting compile..."
         value={userInputs}
         onChange={(event) => setUserInputs(event.target.value)}
