@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { DownloadIcon, AddIcon } from "@chakra-ui/icons";
 
-const Menubar = ({requestCompile}) => {
+const Menubar = ({requestCompile, requestDownload}) => {
   return (
     <Box
       m={4}
@@ -34,7 +34,7 @@ const Menubar = ({requestCompile}) => {
         <Spacer />
         <ButtonGroup isAttached>
           <Tooltip hasArrow label="Save to file">
-            <IconButton icon={<DownloadIcon />}></IconButton>
+            <IconButton icon={<DownloadIcon />} onClick={requestDownload}></IconButton>
           </Tooltip>
           <IconButton icon={<AddIcon />}></IconButton>
         </ButtonGroup>

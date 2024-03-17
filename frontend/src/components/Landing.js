@@ -50,14 +50,41 @@ const Landing = () => {
     } catch {}
   };
 
+  const handleDownload = async () => {
+    const response = await fetch("/download", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ sourceCode: sourceCode }),
+    });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'main.cpp';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } else {
+      console.error('Failed to download code');
+    }
+  };
+
   return (
     <Box>
       <Flex flexDirection="column">
-        <Menubar requestCompile={handleCompile} />
+        <Menubar requestCompile={handleCompile} requestDownload={handleDownload}/>
         <Flex>
           <CodeEditor code={sourceCode} onChange={onChange} />
           <Flex flexDirection="column">
-            <UserInputArea userInputs={userInputs} setUserInputs={setUserInputs} />
+            <UserInputArea
+              userInputs={userInputs}
+              setUserInputs={setUserInputs}
+            />
             <OutputArea outputString={outputDetails} />
           </Flex>
         </Flex>
