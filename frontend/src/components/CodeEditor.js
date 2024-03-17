@@ -1,13 +1,18 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import Editor from "@monaco-editor/react";
 import { useRef, useState } from "react";
 
-const CodeEditor = () => {
+const CodeEditor = ({code, onChange}) => {
   const editorRef = useRef(null);
-  const [sourceCode, setSourceCode] = useState("");
+  const [sourceCode, setSourceCode] = useState(code || "");
 
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
+  };
+
+  const handleEditorChange = (value) => {
+    setSourceCode(value);
+    onChange("sourceCode", value);
   };
 
   return (
@@ -23,9 +28,10 @@ const CodeEditor = () => {
       <Editor
         theme="vs-dark"
         defaultLanguage="cpp"
-        defaultValue="// Monaco Instance"
+        defaultValue="// Code goes here"
+        value={sourceCode}
         onMount={handleEditorDidMount}
-        onChange={(value) => setSourceCode(value)}
+        onChange={handleEditorChange}
         options={{
           glyphMargin: true,
           cursorStyle: "line-thin",
@@ -39,7 +45,6 @@ const CodeEditor = () => {
             size: "actual",
           },
         }}
-        value={sourceCode}
       />
     </Box>
   );

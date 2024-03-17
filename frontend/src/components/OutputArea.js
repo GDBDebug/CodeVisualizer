@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
-const OutputArea = () => {
+const OutputArea = ({outputString}) => {
   return (
     <Box
       m={4}
@@ -13,8 +13,8 @@ const OutputArea = () => {
       borderRadius="20px"
       overflow="hidden"
     >
-      <Text as="kbd" fontSize="xl">
-        Output
+      <Text whiteSpace='pre-wrap' as="kbd" fontSize="xl">
+        {outputString}
       </Text>
     </Box>
   );

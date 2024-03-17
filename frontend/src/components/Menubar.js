@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { DownloadIcon, AddIcon } from "@chakra-ui/icons";
 
-const Menubar = () => {
+const Menubar = ({requestCompile}) => {
   return (
     <Box
       m={4}
@@ -25,7 +25,7 @@ const Menubar = () => {
       overflow="hidden"
     >
       <Flex aminWidth="max-content" alignItems="center" gap="6">
-        <Button borderRadius="10px" bg="#008080">
+        <Button borderRadius="10px" bg="#008080" onClick={requestCompile}>
           Compile and Run
         </Button>
         <Button borderRadius="10px" bg="#008080">
