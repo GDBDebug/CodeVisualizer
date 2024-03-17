@@ -1,8 +1,6 @@
 import { Box, Input } from "@chakra-ui/react";
-import { useState } from "react";
 
-const UserInputArea = () => {
-  const [input, setInput] = useState("");
+const UserInputArea = ({userInputs, setUserInputs}) => {
 
   return (
     <Box
@@ -17,8 +15,8 @@ const UserInputArea = () => {
       <Input
         variant="filled"
         placeholder="Enter space separated inputs before hitting compile..."
-        value={input}
-        onChange={(inputValue) => setInput(inputValue)}
+        value={userInputs}
+        onChange={(event) => setUserInputs(event.target.value)}
       />
     </Box>
   );
