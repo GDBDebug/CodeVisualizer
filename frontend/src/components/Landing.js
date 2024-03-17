@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useToast } from "@chakra-ui/react";
 import CodeEditor from "./CodeEditor";
 import OutputArea from "./OutputArea";
 import UserInputArea from "./UserInputArea";
@@ -17,6 +17,8 @@ const Landing = () => {
   const [sourceCode, setSourceCode] = useState(helloWorld);
   const [outputDetails, setOutputDetails] = useState("");
   const [userInputs, setUserInputs] = useState("");
+
+  const toast = useToast();
 
   const onChange = (action, data) => {
     switch (action) {
@@ -44,8 +46,22 @@ const Landing = () => {
 
       if (data.status === "Success") {
         setOutputDetails(data.stdout);
+        toast({
+          title: "Compilation successful",
+          status: "success",
+          position: "bottom-right",
+          duration: 4000,
+          isClosable: true,
+        });
       } else if (data.status === "Failure") {
         setOutputDetails(data.stderr);
+        toast({
+          title: "Compilation failed",
+          status: "error",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     } catch {}
   };
@@ -62,22 +78,25 @@ const Landing = () => {
     if (response.ok) {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = 'main.cpp';
+      a.download = "main.cpp";
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } else {
-      console.error('Failed to download code');
+      console.error("Failed to download code");
     }
   };
 
   return (
     <Box>
       <Flex flexDirection="column">
-        <Menubar requestCompile={handleCompile} requestDownload={handleDownload}/>
+        <Menubar
+          requestCompile={handleCompile}
+          requestDownload={handleDownload}
+        />
         <Flex>
           <CodeEditor code={sourceCode} onChange={onChange} />
           <Flex flexDirection="column">
